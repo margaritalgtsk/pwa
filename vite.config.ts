@@ -22,15 +22,14 @@ const manifest: false | Partial<ManifestOptions> | undefined = {
   screenshots: [
     {
       src: "screenshot/desktop.png",
-      sizes: "3308x1586",
+      sizes: "1280x720",
       type: "image/png",
       form_factor: "wide",
     },
     {
       src: "screenshot/mobile.png",
-      sizes: "698x1096",
+      sizes: "1080x1920",
       type: "image/png",
-      form_factor: "narrow",
     },
   ],
   orientation: "any",
