@@ -42,5 +42,5 @@ const manifest: false | Partial<ManifestOptions> | undefined = {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA({ registerType: "autoUpdate", manifest })],
+  plugins: [react(), VitePWA({ registerType: "prompt", manifest })],
 });
