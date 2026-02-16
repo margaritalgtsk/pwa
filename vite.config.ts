@@ -42,5 +42,27 @@ const manifest: false | Partial<ManifestOptions> | undefined = {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA({ registerType: "prompt", manifest })],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "prompt",
+      manifest,
+      workbox: {
+        runtimeCaching: [
+          {
+            // urlPattern: ({ request }) => request.destination === "image",
+            urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "images-cache",
+              expiration: {
+                maxEntries: 100,
+                //maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+              },
+            },
+          },
+        ],
+      },
+    }),
+  ],
 });
