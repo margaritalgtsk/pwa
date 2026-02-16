@@ -61,6 +61,24 @@ export default defineConfig({
               },
             },
           },
+          {
+            urlPattern: /^https:\/\/jsonplaceholder\.typicode\.com\/posts.*/,
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "api-cache",
+              networkTimeoutSeconds: 3,
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60, // 1 hour
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+              matchOptions: {
+                ignoreSearch: true,
+              },
+            },
+          },
         ],
       },
     }),
