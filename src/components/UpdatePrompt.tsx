@@ -12,7 +12,7 @@ export const UpdatePrompt = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
-        <p style={{ margin: 0 }}>New content available v.9</p>
+        <p style={{ margin: 0 }}>New content available</p>
         <button className={styles.button} onClick={() => setNeedRefresh(false)}>
           Later
         </button>

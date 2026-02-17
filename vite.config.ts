@@ -50,14 +50,14 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            // urlPattern: ({ request }) => request.destination === "image",
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
+            urlPattern: ({ request }) => request.destination === "image",
+            // urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
             handler: "CacheFirst",
             options: {
               cacheName: "images-cache",
               expiration: {
                 maxEntries: 100,
-                //maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
               },
             },
           },
@@ -69,7 +69,7 @@ export default defineConfig({
               networkTimeoutSeconds: 3,
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60, // 1 hour
+                maxAgeSeconds: 60 * 60,
               },
               cacheableResponse: {
                 statuses: [0, 200],
@@ -77,6 +77,23 @@ export default defineConfig({
               matchOptions: {
                 ignoreSearch: true,
               },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/jsonplaceholder\.typicode\.com\/users.*/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "api-users",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+              matchOptions: {
+                ignoreSearch: true,
+              }, //ignoreSearch is needed to avoid caching multiple entries for the same endpoint with different query parameters
             },
           },
         ],
